@@ -1,0 +1,48 @@
+{:itonami.blueprint/id "cloud-itonami-isic-2819"
+ :itonami.blueprint/name "Manufacture of other general-purpose machinery"
+ :itonami.blueprint/isic-rev5 "2819"
+ :itonami.blueprint/domain :general-purpose-machinery/manufacturing
+ :itonami.blueprint/license "AGPL-3.0-or-later"
+ :itonami.blueprint/social-impact [:worker-safety :equipment-safety :weighing-accuracy-integrity :quality-defect-transparency]
+ :itonami.blueprint/governor :general-purpose-machinery-plant-operations-governor
+ :itonami.blueprint/robotics true
+ :itonami.blueprint/required-technologies [:robotics :identity :forms :dmn :bpmn :audit-ledger :eda :cae]
+ :itonami.blueprint/optional-technologies []
+ :itonami.blueprint/status :public-oss
+ :itonami.blueprint/maturity :implemented
+ :itonami.blueprint/implemented-slice
+ "WeighPkgAdvisor ⊣ General-Purpose Machinery Plant Operations Governor,
+ langgraph-clj StateGraph, append-only audit ledger. A plant OPERATIONS
+ COORDINATION actor for ISIC 2819 (Manufacture of other general-purpose
+ machinery), the RESIDUAL general-machinery class (weighing/packaging
+ machinery, gas generators, fire-extinguisher equipment, and other
+ general-purpose machinery not elsewhere classified) -- this build
+ picks ONE concrete illustrative product line, documented plainly in
+ the README: industrial weighing/packaging-machinery manufacturing
+ (platform scales, checkweighers, batching scales, filling machines,
+ wrapping machines, labeling machines) -- assembly and calibration-
+ test-bench lines producing finished weighing/packaging machinery --
+ not direct assembly/calibration-line-equipment control authority and
+ not legal-metrology or machinery-safety certification authority (e.g.
+ OIML R76 / NIST Handbook 44 legal-for-trade weighing-accuracy
+ certification, or EU Machinery Directive 2006/42/EC CE conformity /
+ ANSI PMMI B155.1 packaging-machinery safety marking). Four ops
+ (`:log-production-batch` / `:schedule-maintenance` /
+ `:flag-safety-concern` / `:coordinate-shipment`), all `:effect
+ :propose` only. Governor checks elaborate this blueprint's four HARD
+ invariants: propose-only effect, closed op allowlist, closed
+ proposal-effect allowlist (no direct assembly/calibration-line-
+ equipment control), permanent equipment-actuate block, permanent
+ legal-metrology/machinery-safety-certification-authority block (this
+ actor never self-issues an OIML R76/NIST Handbook 44 legal-for-trade
+ weighing-accuracy certification or a CE/ANSI-PMMI machinery-safety
+ conformity mark), independent equipment verification/registration
+ before maintenance scheduling, independent batch verification/
+ registration before shipment coordination, independent shipment-
+ quantity recompute against the batch's own logged production
+ quantity, double-schedule guard, product-type validation, calibration-
+ accuracy plausibility validation, and defect-rate plausibility
+ validation. Safety-concern flagging (equipment-safety/quality-defect
+ concern) ALWAYS escalates to a human plant supervisor;
+ `:log-production-batch` is the only op eligible to auto-commit, and
+ only at phase 3 when governor-clean."}
