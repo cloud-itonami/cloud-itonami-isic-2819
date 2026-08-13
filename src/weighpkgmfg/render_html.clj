@@ -565,7 +565,11 @@
             (map (fn [{:keys [id batch-id units destination]}]
                    (let [r (get by-id id)]
                      (row (code id) (code batch-id) (num* units) (esc destination)
-                          (if r (code (get r "shipment_number")) (muted "—"))
+                          ;; the APPEND-ONLY history stores `registry/register-shipment`'s
+                          ;; inner "record" map (see `registry/append`), whose id key is
+                          ;; "record_id" -- "shipment_number" lives on the outer result and
+                          ;; is NOT in the history, so reading it here rendered a blank.
+                          (if r (code (get r "record_id")) (muted "—"))
                           (if r (esc (get r "kind")) (muted "—"))
                           (if r (yn (get r "immutable")) (muted "—")))))
                  (all-shipments db))))))
