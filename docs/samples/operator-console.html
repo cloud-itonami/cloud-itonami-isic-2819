@@ -2472,7 +2472,7 @@ img,svg { max-width: 100%; height: auto; }</style>
 <p><span class="badge">read-only sample</span> <span class="badge">governor-gated</span> <span class="badge">propose-only — never actuates equipment</span> <span class="badge">never self-issues a legal-metrology or machinery-safety certification</span></p>
 <div class="banner">
   <p>Illustrative product line: <strong>industrial weighing / packaging machinery</strong> (platform scales, checkweighers, batching scales, filling machines, wrapping machines, labeling machines) — assembly and calibration-test-bench lines.</p>
-  <p>This page is <strong>generated at build time by driving the real actor</strong> (<code>clojure -M:dev:render-html</code> → <code>weighpkgmfg.render-html</code>), which runs <code>weighpkgmfg.operation</code> → <code>weighpkgmfg.governor</code> → <code>weighpkgmfg.store</code>. Nothing here is hand-written: <strong>20</strong> scenario runs produced <strong>4</strong> commits, <strong>14</strong> HARD governor violations across <strong>12</strong> distinct rules, and <strong>20</strong> audit-ledger facts. The build fails if that evidence is missing.</p>
+  <p>This page is <strong>generated at build time by driving the real actor</strong> (<code>kbb -M:dev:render-html</code> → <code>weighpkgmfg.render-html</code>), which runs <code>weighpkgmfg.operation</code> → <code>weighpkgmfg.governor</code> → <code>weighpkgmfg.store</code>. Nothing here is hand-written: <strong>20</strong> scenario runs produced <strong>4</strong> commits, <strong>14</strong> HARD governor violations across <strong>12</strong> distinct rules, and <strong>20</strong> audit-ledger facts. The build fails if that evidence is missing.</p>
 </div>
 <main>
   <section class="card">
@@ -2685,6 +2685,6 @@ img,svg { max-width: 100%; height: auto; }</style>
   </section>
 </main>
 <footer>
-  <p class="muted">Regenerate with <code>clojure -M:dev:render-html</code>. Deterministic: no timestamps, no random ids, every fold sorted or append-ordered — two consecutive runs against the same seed are byte-identical. Source: <code>src/weighpkgmfg/render_html.cljk</code>.</p>
+  <p class="muted">Regenerate with <code>kbb -M:dev:render-html</code>. Deterministic: no timestamps, no random ids, every fold sorted or append-ordered — two consecutive runs against the same seed are byte-identical. Source: <code>src/weighpkgmfg/render_html.cljk</code>.</p>
 </footer>
 </body></html>

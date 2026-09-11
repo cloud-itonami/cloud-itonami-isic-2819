@@ -28,13 +28,13 @@
   the evidence the page presents -- see `check-invariants!`. The
   HARD-hold requirement is therefore a build-time invariant, not a
   convention: a governor rule that silently stops firing breaks
-  `clojure -M:dev:render-html` instead of quietly shrinking this page.
+  `kbb -M:dev:render-html` instead of quietly shrinking this page.
 
   Deterministic: no timestamps, no random ids, every fold is over a
   sorted or append-ordered sequence, so two consecutive runs against
   the same seed are byte-identical.
 
-  Usage: `clojure -M:dev:render-html [out-file]`
+  Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
   (:require [jp-go-dds.skin]
             [kotoba.lang.text :as str]
@@ -683,7 +683,7 @@
      "(platform scales, checkweighers, batching scales, filling machines, wrapping machines, "
      "labeling machines) — assembly and calibration-test-bench lines.</p>\n"
      "  <p>This page is <strong>generated at build time by driving the real actor</strong> "
-     "(<code>clojure -M:dev:render-html</code> → <code>weighpkgmfg.render-html</code>), which runs "
+     "(<code>kbb -M:dev:render-html</code> → <code>weighpkgmfg.render-html</code>), which runs "
      "<code>weighpkgmfg.operation</code> → <code>weighpkgmfg.governor</code> → "
      "<code>weighpkgmfg.store</code>. Nothing here is hand-written: "
      "<strong>" (esc (count runs)) "</strong> scenario runs produced "
@@ -708,7 +708,7 @@
      (ledger-section db)
      "</main>\n"
      "<footer>\n"
-     "  <p class=\"muted\">Regenerate with <code>clojure -M:dev:render-html</code>. "
+     "  <p class=\"muted\">Regenerate with <code>kbb -M:dev:render-html</code>. "
      "Deterministic: no timestamps, no random ids, every fold sorted or append-ordered — "
      "two consecutive runs against the same seed are byte-identical. "
      "Source: <code>src/weighpkgmfg/render_html.cljk</code>.</p>\n"
