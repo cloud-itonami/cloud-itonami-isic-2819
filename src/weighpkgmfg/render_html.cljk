@@ -36,7 +36,7 @@
 
   Usage: `kbb -M:dev:render-html [out-file]`
   (default `docs/samples/operator-console.html`)."
-  (:require [jp-go-dds.skin]
+  (:require [kotoba.io :as kio] [jp-go-dds.skin]
             [kotoba.lang.text :as str]
             [langgraph.graph :as g]
             [weighpkgmfg.advisor :as advisor]
@@ -802,7 +802,7 @@
         html (render result)
         attribution (approval-attribution (:db result) (:runs result))]
     (io!
-     (.mkdirs (java.io.File. (or (.getParent (java.io.File. ^String out)) ".")))
+     (kio/mkdirs (kio/file (or (kio/parent (kio/file ^String out)) ".")))
      (spit out html :encoding "UTF-8"))
     (println "wrote" out
              (str "(" (count html) " chars, "
