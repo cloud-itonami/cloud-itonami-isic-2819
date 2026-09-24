@@ -1,0 +1,33 @@
+;; What this vertical's robot physically does, declared for
+;; kotoba.robotics.process (kotoba-lang/robotics). `kbb -M:dev:physics` runs it.
+;;
+;; README: this plant assembles and calibration-tests weighing and packaging
+;; machinery (platform scales, checkweighers, batching scales, filling and
+;; wrapping machines). The robots' physical work: bringing the stack of
+;; calibration test weights from the weight store to the platform scale under
+;; test, and placing individual test weights on the load receptor.
+;;
+;; Every number without a cited source is marked `estimate` in its :basis.
+{:physics/schema "itonami.physical-ai.spec.v1"
+ :repo "cloud-itonami/cloud-itonami-isic-2819"
+ :cases
+ [{:id :test-weights-to-scale
+   :kind :transport
+   :procedure "AMR carries a load of calibration test weights from the weight store to the platform scale under test (60 m)"
+   :params {:mass-kg 150.0 :distance-m 60.0 :v-max-mps 1.0 :a-max-mps2 0.4
+            :brake-decel-mps2 0.6 :drive-force-n 450.0 :crr 0.015
+            :cog-height-m 0.30 :support-half-length-m 0.40 :payload-cog-height-m 0.35
+            :max-time-s 1200.0}
+   :sweep {:param :payload-kg :values [100.0 250.0 500.0 750.0 1000.0]}
+   :quantity :cycle-time-s
+   :limit {:max 66.0 :basis "estimate: one weight-shuttle leg inside the calibration line's takt"}
+   :boundary {:lo 50.0 :hi 3000.0}}
+  {:id :test-weight-onto-receptor
+   :kind :manipulator
+   :procedure "arm lifts one test weight (1-2-5 series) from the shuttle onto the scale's load receptor"
+   :params {:l1-m 0.70 :l2-m 0.60 :m1-kg 12.0 :m2-kg 8.0
+            :from [0.60 0.40] :to [0.90 0.10] :duration-s 2.5 :steps 400}
+   :sweep {:param :payload-kg :values [1.0 2.0 5.0 10.0 20.0]}
+   :quantity :peak-tau1-nm
+   :limit {:max 300.0 :basis "estimate: continuous shoulder torque of a ~25 kg-class industrial arm; the 1-2-5 weight series follows OIML R 111 nominal values"}
+   :boundary {:lo 0.5 :hi 60.0}}]}
