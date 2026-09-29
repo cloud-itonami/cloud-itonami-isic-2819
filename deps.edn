@@ -35,7 +35,7 @@
         io.github.kotoba-lang/langchain
         {:local/root "../../kotoba-lang/langchain"}
         ;; DADS (デジタル庁デザインシステム) -- the workspace's base design
-        ;; system (com-junkawasaki/root CLAUDE.md, 2026-08-05). Used ONLY by
+        ;; system (com-junkawasaki/root AGENTS.md, 2026-08-05). Used ONLY by
         ;; `weighpkgmfg.render-html` to style docs/samples/operator-console.html;
         ;; the actor itself has no UI dependency. Pinned by git sha so a
         ;; standalone fork builds the same page.
